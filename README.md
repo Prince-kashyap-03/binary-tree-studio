@@ -272,15 +272,6 @@ binary-tree-studio/
 
 ## Screenshots
 
-> Place screenshot images in the `assets/` folder and link them here.
-
-```
-assets/
-├── screenshot_tab1.png    # Nodes → Traversals
-├── screenshot_tab2.png    # Traversals → Tree
-└── screenshot_tab3.png    # Tree Editor with type panel
-```
-
 ## ![Binary Tree Studio, Tree Editor tab](assets/screenshot.png)
 
 ## Troubleshooting
