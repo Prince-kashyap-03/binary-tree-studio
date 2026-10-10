@@ -12,24 +12,25 @@ Binary Tree Studio lets you build, edit, and animate binary trees entirely throu
 
 All three tabs operate on the **same** underlying tree owned by the C engine, so you can build a BST in Tab 1 and immediately edit it by hand in Tab 3.
 
-| Tab | Name | What it does |
-|-----|------|--------------|
-| 1 | **Nodes → Traversals** | Type values (or click *Generate* for random ones), click *Build tree* to insert them into a BST, and see all four traversals instantly. |
-| 2 | **Traversals → Tree** | Paste one or two traversal sequences and click *Reconstruct tree* to rebuild the unique tree they describe (see the table below). |
-| 3 | **Tree Editor** | Full interactive editor: click nodes to select, use dashed `+` slots to add a child on a specific side, right-click for a context menu, Ctrl+Z / Ctrl+Y to undo/redo, Save/Load JSON, random tree generator. |
+| Tab | Name                   | What it does                                                                                                                                                                                                 |
+| --- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | **Nodes → Traversals** | Type values (or click _Generate_ for random ones), click _Build tree_ to insert them into a BST, and see all four traversals instantly.                                                                      |
+| 2   | **Traversals → Tree**  | Paste one or two traversal sequences and click _Reconstruct tree_ to rebuild the unique tree they describe (see the table below).                                                                            |
+| 3   | **Tree Editor**        | Full interactive editor: click nodes to select, use dashed `+` slots to add a child on a specific side, right-click for a context menu, Ctrl+Z / Ctrl+Y to undo/redo, Save/Load JSON, random tree generator. |
 
 ### Interactive Editing (Tab 3)
 
 - **Click** a node to select it (highlighted in gold).
 - **Dashed `+` circles** appear on the available child slots of the selected node. Click one to immediately add a child there.
-- **Right-click** a node for: *Add Left Child*, *Add Right Child*, *Edit value*, *Delete subtree*.
-- **Ctrl+Z** / **Ctrl+Y** (or *Ctrl+Shift+Z*) to undo and redo up to 100 steps.
+- **Right-click** a node for: _Add Left Child_, _Add Right Child_, _Edit value_, _Delete subtree_.
+- **Ctrl+Z** / **Ctrl+Y** (or _Ctrl+Shift+Z_) to undo and redo up to 100 steps.
 - **Save JSON** / **Load JSON** to persist trees to disk and reload them later. (Saved `.json` files are in `.gitignore` by default; copy them into `examples/` if you want to commit them.)
 - **Random tree** with a configurable node count (1–127).
 
 ### Four Traversals with Animation
 
 The output panel (visible in all tabs) shows the current tree's:
+
 - **Preorder** (Root, Left, Right)
 - **Inorder** (Left, Root, Right)
 - **Postorder** (Left, Right, Root)
@@ -45,29 +46,29 @@ The sidebar on the right classifies the current tree into every standard type in
 
 ## Tree Types Detected
 
-| Type | Definition |
-|------|-----------|
-| **Full** | Every node has 0 or 2 children — no node has exactly one child. |
-| **Perfect** | Full, and every leaf is at the same depth. |
-| **Complete** | All levels are full except possibly the last, which is filled left to right. |
-| **Height-balanced** | The heights of the left and right subtrees at every node differ by at most 1 (AVL property). |
+| Type                    | Definition                                                                                                 |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Full**                | Every node has 0 or 2 children — no node has exactly one child.                                            |
+| **Perfect**             | Full, and every leaf is at the same depth.                                                                 |
+| **Complete**            | All levels are full except possibly the last, which is filled left to right.                               |
+| **Height-balanced**     | The heights of the left and right subtrees at every node differ by at most 1 (AVL property).               |
 | **Degenerate (skewed)** | Every node has at most one child, forming a single chain. Subtypes: left-skewed, right-skewed, or zig-zag. |
-| **Binary Search Tree** | Inorder traversal is strictly increasing (left subtree < root < right subtree, no duplicates). |
-| **Min-Heap** | The tree is complete and every parent value ≤ both its children. |
-| **Max-Heap** | The tree is complete and every parent value ≥ both its children. |
+| **Binary Search Tree**  | Inorder traversal is strictly increasing (left subtree < root < right subtree, no duplicates).             |
+| **Min-Heap**            | The tree is complete and every parent value ≤ both its children.                                           |
+| **Max-Heap**            | The tree is complete and every parent value ≥ both its children.                                           |
 
 ---
 
 ## Traversal Combinations That Can Rebuild a Tree
 
-| Combination | Rebuilds any binary tree? | Notes |
-|-------------|--------------------------|-------|
-| **Preorder only** | BST only | For a BST, inserting the preorder sequence in order recreates the exact same tree. |
-| **Postorder only** | BST only | Inserting in reverse postorder recreates the BST. |
-| **Inorder + Preorder** | ✔ Yes (distinct values) | The preorder root splits the inorder into left/right recursively. |
-| **Inorder + Postorder** | ✔ Yes (distinct values) | The postorder root splits the inorder into left/right recursively. |
-| **Inorder + Level-order** | ✔ Yes (distinct values) | The first level-order value is the root; subsequent values are partitioned by the inorder split. |
-| **Inorder alone** | ✗ No | A BST's inorder is always the sorted sequence, so every BST with the same values produces the *same* inorder — making reconstruction impossible without additional information. Many different tree shapes share the same inorder. |
+| Combination               | Rebuilds any binary tree? | Notes                                                                                                                                                                                                                              |
+| ------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Preorder only**         | BST only                  | For a BST, inserting the preorder sequence in order recreates the exact same tree.                                                                                                                                                 |
+| **Postorder only**        | BST only                  | Inserting in reverse postorder recreates the BST.                                                                                                                                                                                  |
+| **Inorder + Preorder**    | ✔ Yes (distinct values)   | The preorder root splits the inorder into left/right recursively.                                                                                                                                                                  |
+| **Inorder + Postorder**   | ✔ Yes (distinct values)   | The postorder root splits the inorder into left/right recursively.                                                                                                                                                                 |
+| **Inorder + Level-order** | ✔ Yes (distinct values)   | The first level-order value is the root; subsequent values are partitioned by the inorder split.                                                                                                                                   |
+| **Inorder alone**         | ✗ No                      | A BST's inorder is always the sorted sequence, so every BST with the same values produces the _same_ inorder — making reconstruction impossible without additional information. Many different tree shapes share the same inorder. |
 
 > **Why inorder alone fails:** Consider values {1, 2, 3}. Their BST inorder is always `1 2 3`, regardless of insertion order. The tree could be a balanced BST (2 at root), a right-skewed chain (1→2→3), or a left-skewed chain (3→2→1). All give inorder `1 2 3`. You need a second sequence to disambiguate.
 
@@ -106,11 +107,11 @@ The sidebar on the right classifies the current tree into every standard type in
 
 ## Requirements
 
-| Requirement | Minimum | Notes |
-|-------------|---------|-------|
-| Python | 3.9+ | Must include `tkinter` (standard on Windows) |
-| gcc | Any recent | Must be **64-bit** if Python is 64-bit — see Troubleshooting |
-| OS | Windows 10+, Linux, macOS | See per-OS notes below |
+| Requirement | Minimum                   | Notes                                                        |
+| ----------- | ------------------------- | ------------------------------------------------------------ |
+| Python      | 3.9+                      | Must include `tkinter` (standard on Windows)                 |
+| gcc         | Any recent                | Must be **64-bit** if Python is 64-bit — see Troubleshooting |
+| OS          | Windows 10+, Linux, macOS | See per-OS notes below                                       |
 
 ---
 
@@ -190,26 +191,26 @@ python3 bst_gui.py
 
 ### Tab 3 — Tree Editor
 
-| Action | How |
-|--------|-----|
-| Select a node | Left-click it (turns gold) |
-| Add a child | Select a node, then click the dashed `+` on the desired side, *or* use the toolbar buttons |
-| Edit a node's value | Select it, click **Edit value** (or right-click → Edit value) |
-| Delete a subtree | Select the subtree root, click **Delete subtree** |
-| Undo / Redo | **Ctrl+Z** / **Ctrl+Y** (up to 100 steps) |
-| Create a new tree from scratch | **Clear tree**, then **Create root** |
-| Save / Load | **Save JSON** / **Load JSON** |
-| Random tree | Set node count, click **Random tree** |
+| Action                         | How                                                                                        |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| Select a node                  | Left-click it (turns gold)                                                                 |
+| Add a child                    | Select a node, then click the dashed `+` on the desired side, _or_ use the toolbar buttons |
+| Edit a node's value            | Select it, click **Edit value** (or right-click → Edit value)                              |
+| Delete a subtree               | Select the subtree root, click **Delete subtree**                                          |
+| Undo / Redo                    | **Ctrl+Z** / **Ctrl+Y** (up to 100 steps)                                                  |
+| Create a new tree from scratch | **Clear tree**, then **Create root**                                                       |
+| Save / Load                    | **Save JSON** / **Load JSON**                                                              |
+| Random tree                    | Set node count, click **Random tree**                                                      |
 
 ### Mouse controls
 
-| Input | Effect |
-|-------|--------|
-| Left-click node | Select |
-| Left-click `+` slot | Add child there (prompts for value) |
-| Left-click canvas (empty) | Deselect |
-| Right-click node | Context menu (Add left/right, Edit, Delete) |
-| Middle-click node (macOS) | Same as right-click |
+| Input                     | Effect                                      |
+| ------------------------- | ------------------------------------------- |
+| Left-click node           | Select                                      |
+| Left-click `+` slot       | Add child there (prompts for value)         |
+| Left-click canvas (empty) | Deselect                                    |
+| Right-click node          | Context menu (Add left/right, Edit, Delete) |
+| Middle-click node (macOS) | Same as right-click                         |
 
 ---
 
@@ -280,9 +281,7 @@ assets/
 └── screenshot_tab3.png    # Tree Editor with type panel
 ```
 
-<!-- TODO: add screenshot — e.g. ![Tab 1 — Nodes to Traversals](assets/screenshot_tab1.png) -->
-
----
+## ![Binary Tree Studio, Tree Editor tab](assets/screenshot.png)
 
 ## Troubleshooting
 
@@ -291,6 +290,7 @@ assets/
 The DLL bitness doesn't match Python's bitness. This usually means you have a **32-bit MinGW** gcc but **64-bit Python** (or vice versa).
 
 **Check:**
+
 ```powershell
 python -c "import struct; print(struct.calcsize('P')*8, 'bit Python')"
 gcc -dumpmachine
@@ -299,6 +299,7 @@ gcc -dumpmachine
 If Python is `64 bit` and gcc prints something like `i686-w64-mingw32` (32-bit), you need 64-bit gcc.
 
 **Fix:** Install WinLibs MinGW-w64 (64-bit):
+
 1. Download from <https://github.com/brechtsanders/winlibs_mingw/releases> — pick a `x86_64` (not `i686`) release.
 2. Extract it (e.g. to `C:\mingw64`).
 3. Add `C:\mingw64\bin` to the **front** of your PATH (System → Advanced → Environment Variables, or `$env:PATH = "C:\mingw64\bin;$env:PATH"` for the current session).
