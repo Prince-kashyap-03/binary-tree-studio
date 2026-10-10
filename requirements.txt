@@ -1,0 +1,14 @@
+# No third-party dependencies — standard library only.
+#
+# This project uses exclusively modules that ship with CPython:
+#   tkinter, ctypes, json, os, random, subprocess, sys
+#
+# Requirements:
+#   - Python 3.9+ with tkinter enabled (standard on Windows; on Linux install python3-tk)
+#   - A 64-bit gcc compiler reachable on PATH (see README.md for setup)
+#     Windows: MinGW-w64 from https://github.com/brechtsanders/winlibs_mingw/releases
+#     Linux  : sudo apt install gcc  (or equivalent)
+#     macOS  : xcode-select --install  (or brew install gcc)
+#
+# The C engine (bst_engine.c) is compiled automatically on first run.
+# No pip install step is required.
